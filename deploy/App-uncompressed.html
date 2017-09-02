@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CustomCard</title>
+
+    <script type="text/javascript" src="/apps/2.1/sdk.js"></script>
+
+    <script type="text/javascript">
+        Rally.onReady(function () {
+                Ext.define('Card', {
+    extend: 'Rally.ui.cardboard.Card',
+    alias: 'widget.customcard',
+
+    initComponent: function() {
+        this.plugins = []; //disable all the default plugins
+        this.callParent(arguments);
+    },
+
+    _buildHtml: function() {
+        return '<div>hi</div>';
+    }
+});
+
+                Ext.define('CustomApp', {
+    extend: 'Rally.app.App',
+    componentCls: 'app',
+    launch: function() {
+        this.add({
+            xtype: 'rallycardboard',
+            types: ['User Story'],
+            attribute: 'ScheduleState',
+            context: this.getContext(),
+            cardConfig: {
+                xtype: 'customcard'
+            }
+        });
+    }
+});
+
+
+            Rally.launchApp('CustomApp', {
+                name:"CustomCard",
+	            parentRepos:""
+            });
+
+        });
+    </script>
+
+
+
+    <style type="text/css">
+        .app {
+  /* Add app styles here */
+}
+
+    </style>
+</head>
+<body>
+</body>
+</html>
